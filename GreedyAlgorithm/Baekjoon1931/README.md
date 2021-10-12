@@ -4,7 +4,7 @@
 
 <br> 
 
-### :pushpin: 도전 코드
+### :pushpin: 도전 코드(시간초과)
 
 ```c++
 #include <iostream>
@@ -91,3 +91,16 @@ int main() {
 }
 ```
 
+<br>
+
+### :pushpin: 예상되는 이유
+
+- insertion sort에서 시간 초과
+  - 최선의 경우 : O(n), 최악의 경우 : O(n^2)
+
+<br> 
+
+### :pushpin: 해결 방안
+
+- 클래스 설계 대신 pair 객체를 사용
+- 퀵 정렬을 사용하는 Algorithm Header의 sort()를 사용한 vector 정렬
