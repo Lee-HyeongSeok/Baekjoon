@@ -104,3 +104,85 @@ int main() {
 
 - 클래스 설계 대신 pair 객체를 사용
 - 퀵 정렬을 사용하는 Algorithm Header의 sort()를 사용한 vector 정렬
+
+<br> 
+
+### :pushpin: 맞은 답
+
+```c++
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+#define MAXN 100000
+
+class MeetingClass {
+private : 
+	int start;
+	int end;
+	int maxConf;
+public : 
+	void setStart() { cin >> start; }
+	void setEnd() { cin >> end; }
+	int getStart() { return start; }
+	int getEnd() { return end; }
+	void setMaxConf(int cnt) { maxConf = cnt; }
+	int getMaxConf() { return maxConf; }
+};
+
+MeetingClass mcObj[MAXN];
+
+bool compareEndTime(MeetingClass& c1, MeetingClass& c2) {
+	return c1.getEnd() < c2.getEnd();
+}
+
+bool compareStartTime(MeetingClass& c1, MeetingClass& c2) {
+	return c1.getStart() < c2.getStart();
+}
+
+int main() {
+	int N = 0;
+	int temp = 0, cnt = 0, maxConf = 0;
+
+	cin >> N;
+
+	
+	for (int i = 0; i < N; ++i) {
+		mcObj[i].setStart(); mcObj[i].setEnd();
+	}
+
+	// 시작 시간 오름차순 기준으로 정렬, 시작 시간이 같다면 끝 시간 기준으로 정렬
+	sort(mcObj, mcObj+N, compareEndTime);
+
+
+	for (int i = 0; i < N; ++i) {
+		// 현재 선택된 회의의 끝 시간보다 크거나 같은 다른 회의 시작 시간이 있다면
+		if (temp <= mcObj[i].getStart()) {
+			int j = i + 1;
+			while ((j < N) && (mcObj[i].getEnd() == mcObj[j].getEnd())) {
+				j++;
+			}
+			sort(mcObj + i, mcObj + j, compareStartTime);
+			temp = mcObj[i].getEnd();
+			maxConf++;
+		}
+	}
+	cout << maxConf << endl;
+}
+
+// 출처 : http://melonicedlatte.com/algorithm/2018/02/02/014531.html
+```
+
+<br> 
+
+### :pushpin: 바뀐 부분
+
+- vector에 삽입하지 않고 전역 변수로 Class 배열을 선언
+- 100,000개의 데이터를 처리해야 하므로 O(n^2) 시간 복잡도는 시간 초과를 발생시킴
+  - O(nlogn) 시간 복잡도로 해결해야 함
+- 회의의 끝 시간을 기준으로 정렬 후, 현재 기준에서 가능한 회의가 빨리 끝나는 회의 일정을 선택
+  - 1. 회의 끝 시간 기준 정렬
+    2. 끝 시간이 같은 회의들에 대해 회의 시작 시간 기준으로 재정렬
+  - 모든 회의의 끝나는 시간이 같다고 가정(8 8, 7 8 형식으로 데이터가 삽입될 수 있기 때문)
