@@ -189,7 +189,7 @@
 
     > **JSON : {"key" : "value"}**
     >
-    > **XML : <key><value></value></key>**
+    > **XML : \<key>\<value>\</value>\</key>**
 
 <br>
 
