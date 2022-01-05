@@ -64,7 +64,6 @@
 
 - 그래프를 순회하는 알고리즘
 - 특정 노드에서 시작해 다음 분기로 넘어가기 전 해당 분기를 완벽하게 탐색하는 방법
-- 하나의 노드와 인접한 노드, 그 노드와 인접한 노드를 모두 탐색하고
 
 ![Untitled Diagram drawio (1)](https://user-images.githubusercontent.com/55940552/148235708-ecebfef7-7284-4ba3-b26e-d5aa5a5539a6.png) 
 
