@@ -265,3 +265,9 @@ int main()
 }
 ```
 
+
+***
+
+#### 참조
+
+- https://velog.io/@matcha_/BOJ-%EB%B0%B1%EC%A4%80-1463-CDP
